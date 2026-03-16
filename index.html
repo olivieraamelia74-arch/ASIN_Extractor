@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASIN Extractor | VSE Fixer Tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5568d3;
+            --secondary: #764ba2;
+            --accent: #a78bfa;
+            --bg-dark: #0a0e27;
+            --bg-card: #1a1f3a;
+            --bg-card-hover: #252b4a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --text-muted: #718096;
+            --border: rgba(167, 139, 250, 0.1);
+            --glow: rgba(102, 126, 234, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-size: 15px;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(167, 139, 250, 0.1) 0%, transparent 50%);
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid var(--border);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 2rem;
+            font-weight: 400;
+        }
+
+        .glass-card {
+            background: rgba(26, 31, 58, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(167, 139, 250, 0.3);
+            box-shadow: 0 12px 48px rgba(102, 126, 234, 0.2);
+        }
+
+        .sec-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .sec-eyebrow {
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.625rem;
+        }
+
+        .sec-title {
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .sec-sub {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.75rem;
+            border-radius: 18px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(167, 139, 250, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 12px var(--glow));
+        }
+
+        .feature-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.625rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .install-steps {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .install-steps ol {
+            padding-left: 1.5rem;
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .install-steps li {
+            margin-bottom: 1.125rem;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 2rem;
+            counter-increment: step-counter;
+        }
+
+        .install-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.625rem;
+            height: 1.625rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8125rem;
+        }
+
+        .install-steps code {
+            background: rgba(102, 126, 234, 0.15);
+            color: var(--accent);
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 1.75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            box-shadow: 0 4px 16px var(--glow);
+        }
+
+        .btn-secondary {
+            background: rgba(102, 126, 234, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--glow);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.25);
+            border-color: rgba(167, 139, 250, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .person-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 18px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .person-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .person-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(167, 139, 250, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.2);
+        }
+
+        .person-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .person-card.lead {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+            border-color: rgba(167, 139, 250, 0.3);
+        }
+
+        .person-card.support {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .person-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 2px solid rgba(167, 139, 250, 0.3);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .person-card:hover .person-avatar {
+            border-color: var(--accent);
+            box-shadow: 0 10px 28px var(--glow);
+        }
+
+        .person-fallback {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+            border: 2px solid rgba(167, 139, 250, 0.3);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .person-name {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.375rem;
+        }
+
+        .person-role {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 2.5rem 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2.5rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.625rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer p:last-child {
+            color: var(--text-muted);
+            font-size: 0.8125rem;
+        }
+
+        .note-box {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .note-box strong {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .glass-card {
+                padding: 1.75rem 1.25rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .people-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .hero {
+                padding: 2rem 1rem 1.5rem;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <div class="hero">
+        <div class="hero-badge">
+            <span>🔍</span>
+            <span>VSE Fixer Tool</span>
+        </div>
+        <h1>ASIN Extractor</h1>
+        <p>Automatically extract and manage ASINs from VSE Fixer with marketplace detection, smart filtering, and one-click copying.</p>
+    </div>
+
+    <div class="container">
+        <section class="glass-card" id="features">
+            <div class="sec-header">
+                <div class="sec-eyebrow">Features</div>
+                <div class="sec-title">What it does</div>
+                <p class="sec-sub">Powerful ASIN extraction and management for VSE Fixer workflows.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Auto-Detection</h3>
+                    <p>Automatically opens when ASINs are detected on the page. No manual triggering needed.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Marketplace Support</h3>
+                    <p>Supports 30+ Amazon marketplaces with color-coded badges and direct PDP links.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Smart Extraction</h3>
+                    <p>Extracts up to 10 ASINs with marketplace IDs using advanced pattern matching.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Quick Copy</h3>
+                    <p>Select multiple ASINs and copy them with a single click. Comma-separated format.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Manual Reload</h3>
+                    <p>Reload button in the header to re-extract ASINs if auto-detection fails.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Compact Design</h3>
+                    <p>Slim, draggable widget that doesn't obstruct your workflow. Fixed buttons at bottom.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-card" id="installation">
+            <div class="sec-header">
+                <div class="sec-eyebrow">Installation</div>
+                <div class="sec-title">Get Started</div>
+                <p class="sec-sub">One-click installation with Tampermonkey.</p>
+            </div>
+
+            <div class="install-steps">
+                <ol>
+                    <li>First, install <strong>Tampermonkey</strong> extension if you don't have it (click button below)</li>
+                    <li>Once Tampermonkey is installed, click the <strong>Install Script</strong> button</li>
+                    <li>Tampermonkey will open with the script - click <strong>Install</strong> to confirm</li>
+                    <li>Navigate to <code>https://prod.vse-fixer.tools.amazon.dev/*</code></li>
+                    <li>The widget will automatically open when ASINs are detected!</li>
+                </ol>
+            </div>
+
+            <div class="button-container">
+                <a href="https://www.tampermonkey.net/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <span>🔧</span>
+                    <span>Install Tampermonkey</span>
+                </a>
+                <a href="https://gist.github.com/olivieraamelia74-arch/e65d9a87bd7b97abc5c204745d447380/raw/77cc1ccf3ee8da7c802a6dc31b59f8cdccabac22/ASIN_Extractor.user.js" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <span>📥</span>
+                        <span>Install Script</span>
+                </a>
+            </div>
+
+            <div class="note-box">
+                <strong>Note:</strong> Install Tampermonkey first, then click the Install Script button. The script will automatically prompt for installation in Tampermonkey.
+            </div>
+        </section>
+
+        <section class="glass-card" id="how-it-works">
+            <div class="sec-header">
+                <div class="sec-eyebrow">How It Works</div>
+                <div class="sec-title">Simple & Automatic</div>
+                <p class="sec-sub">The widget works seamlessly in the background.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">1️⃣</div>
+                    <h3>Page Load</h3>
+                    <p>Script activates when you open VSE Fixer and monitors for ASINs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">2️⃣</div>
+                    <h3>Detection</h3>
+                    <p>Polls every second for ASINs in the page content using regex patterns.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">3️⃣</div>
+                    <h3>Auto-Open</h3>
+                    <p>Widget opens automatically when ASINs are found, showing results immediately.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">4️⃣</div>
+                    <h3>Fetch Integration</h3>
+                    <p>Clicking any "Fetch" button triggers automatic re-extraction with loading animation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-card" id="team">
+            <div class="sec-header">
+                <div class="sec-eyebrow">The Team</div>
+                <div class="sec-title">Built by</div>
+                <p class="sec-sub">The people behind the tool.</p>
+            </div>
+
+            <div class="people-grid">
+                <a href="https://atoz.amazon.work/phonetool/users/nmayuben" target="_blank" rel="noopener noreferrer" class="person-card">
+                    <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/mayur.jpg?raw=true" alt="Mayur Bendale" class="person-avatar"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                    <div class="person-fallback">M</div>
+                    <div class="person-name">Mayur Bendale</div>
+                    <div class="person-role">Content Reviewer</div>
+                </a>
+
+                <a href="https://atoz.amazon.work/phonetool/users/tusarmuk" target="_blank" rel="noopener noreferrer" class="person-card">
+                    <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/204637985.jpg?raw=true" alt="Tusar Mukhopadhyay" class="person-avatar"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                    <div class="person-fallback">T</div>
+                    <div class="person-name">Tusar Mukhopadhyay</div>
+                    <div class="person-role">Content Reviewer</div>
+                </a>
+
+                <a href="https://atoz.amazon.work/phonetool/users/bshouvik" target="_blank" rel="noopener noreferrer" class="person-card">
+                    <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/shouvik.jpg?raw=true" alt="Shouvik Banerjee" class="person-avatar"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                    <div class="person-fallback">S</div>
+                    <div class="person-name">Shouvik Banerjee</div>
+                    <div class="person-role">Content Reviewer</div>
+                </a>
+
+                <a href="https://atoz.amazon.work/phonetool/users/sumazman" target="_blank" rel="noopener noreferrer" class="person-card">
+                    <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/suman.jpg?raw=true" alt="Suman Mandal" class="person-avatar"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                    <div class="person-fallback">S</div>
+                    <div class="person-name">Suman Mandal</div>
+                    <div class="person-role">Content Reviewer</div>
+                </a>
+
+                <a href="https://atoz.amazon.work/phonetool/users/bpmishra" target="_blank" rel="noopener noreferrer" class="person-card">
+                    <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/Prakash.jpg?raw=true" alt="Prakash Mishra" class="person-avatar"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                    <div class="person-fallback">P</div>
+                    <div class="person-name">Prakash Mishra</div>
+                    <div class="person-role">Sr Content Reviewer Italian</div>
+                </a>
+            </div>
+        </section>
+
+        
+
+        <div class="divider"></div>
+
+<section class="glass-card" id="support">
+    <div class="sec-header">
+        <div class="sec-eyebrow" style="color:#667eea;">Support from SME</div>
+        <div class="sec-title">Technical Guidance</div>
+        <p class="sec-sub">Expert support and guidance.</p>
+    </div>
+
+    <div class="people-grid" style="justify-items: center;">
+        <a href="https://atoz.amazon.work/phonetool/users/dnmnjun" target="_blank" rel="noopener noreferrer" class="person-card support">
+            <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/mnju.jpg?raw=true" alt="Manjunath D" class="person-avatar"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="person-fallback">M</div>
+            <div class="person-name">Manjunath D</div>
+            <div class="person-role">Ad Operation SME</div>
+        </a>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="glass-card" id="leadership">
+    <div class="sec-header">
+        <div class="sec-eyebrow" style="color:#a78bfa;">Leadership</div>
+        <div class="sec-title">Guided by</div>
+        <p class="sec-sub">The leaders who make it possible.</p>
+    </div>
+
+    <div class="people-grid">
+        <a href="https://atoz.amazon.work/phonetool/users/gaires" target="_blank" rel="noopener noreferrer" class="person-card lead">
+            <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/sunita.jpg?raw=true" alt="Sunita Kumari Gaire" class="person-avatar"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="person-fallback">S</div>
+            <div class="person-name">Sunita Kumari Gaire</div>
+            <div class="person-role">Ad Policing Manager</div>
+        </a>
+
+        <a href="https://atoz.amazon.work/phonetool/users/annithin" target="_blank" rel="noopener noreferrer" class="person-card lead">
+            <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/nithin.jpg?raw=true" alt="Nithin Anand" class="person-avatar"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="person-fallback">N</div>
+            <div class="person-name">Nithin Anand</div>
+            <div class="person-role">Business Operations Manager</div>
+        </a>
+    </div>
+</section>
+    </div>
+
+    <div class="footer">
+        <p>🔍 ASIN Extractor v4.4.1</p>
+        <p>Built with ❤️ for VSE Fixer workflows</p>
+        <p>© 2026 Amazon Ad Policing Team</p>
+    </div>
+</body>
+</html>
