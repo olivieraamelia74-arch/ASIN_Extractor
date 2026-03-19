@@ -108,6 +108,35 @@
             font-weight: 400;
         }
 
+        /* Browser Compatibility Badge */
+        .browser-compat {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .browser-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+        }
+
+        .browser-item.supported {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .browser-item.partial {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
         .glass-card {
             background: rgba(26, 31, 58, 0.6);
             border: 1px solid var(--border);
@@ -209,6 +238,531 @@
             color: var(--text-secondary);
             font-size: 0.875rem;
             line-height: 1.5;
+        }
+
+        /* Interactive Tool Preview Styles */
+        .preview-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .demo-scenarios {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .scenario-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(102, 126, 234, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .scenario-btn:hover {
+            background: rgba(102, 126, 234, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .scenario-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+        }
+
+        .tool-mockup {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            max-width: 280px;
+            margin: 0 auto;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            font-family: monospace;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .tool-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tool-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tool-btn-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .tool-btn-icon:hover {
+            background: rgba(102, 126, 234, 0.8);
+            transform: scale(1.1);
+        }
+
+        .tool-content {
+            background: #fff;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            gap: 12px;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid rgba(102, 126, 234, 0.2);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #667eea;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 30px 20px;
+            color: #999;
+            font-size: 11px;
+        }
+
+        .asin-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 8px;
+            margin-bottom: 6px;
+            gap: 6px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .asin-row:hover {
+            transform: translateX(3px);
+        }
+
+        .asin-checkbox {
+            width: 14px;
+            height: 14px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .asin-badge {
+            color: #fff;
+            border-radius: 3px;
+            padding: 2px 6px;
+            font-size: 9px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .asin-link {
+            color: #1a5276;
+            text-decoration: none;
+            flex: 1;
+            font-weight: bold;
+            font-size: 11px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .asin-link:hover {
+            text-decoration: underline;
+        }
+
+        .tool-footer {
+            display: flex;
+            gap: 6px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 0 0 10px 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .tool-action-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #fff;
+            transition: all 0.2s ease;
+        }
+
+        .tool-action-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-unselect {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .btn-copy {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .preview-caption {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .demo-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* FAQ Styles */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .faq-icon {
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 1.5rem 1.25rem;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .faq-answer code {
+            background: rgba(102, 126, 234, 0.15);
+            color: var(--accent);
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8125rem;
+        }
+
+        /* Feedback Form Styles */
+        .feedback-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--text-primary);
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--glow);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Floating Feedback Button */
+        .floating-feedback-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px var(--glow);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-feedback-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 24px var(--glow);
+        }
+
+        /* Guided Tour Styles */
+        .tour-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9998;
+            display: none;
+        }
+
+        .tour-overlay.active {
+            display: block;
+        }
+
+        .tour-tooltip {
+            position: absolute;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            max-width: 300px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            z-index: 9999;
+            display: none;
+        }
+
+        .tour-tooltip.active {
+            display: block;
+        }
+
+        .tour-tooltip h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tour-tooltip p {
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .tour-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tour-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tour-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .tour-progress {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .tour-start-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            background: rgba(102, 126, 234, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .tour-start-btn:hover {
+            background: rgba(102, 126, 234, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .success-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            z-index: 100000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+
+        .success-toast.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .install-steps {
@@ -480,6 +1034,18 @@
             .button-container {
                 flex-direction: column;
             }
+
+            .tool-mockup {
+                max-width: 100%;
+            }
+
+            .floating-feedback-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+            }
         }
 
         html {
@@ -490,6 +1056,24 @@
 <body>
     <div class="bg-animation"></div>
 
+    <!-- Success Toast -->
+    <div id="successToast" class="success-toast">✅ Copied to clipboard!</div>
+
+    <!-- Floating Feedback Button -->
+    <button class="floating-feedback-btn" id="floatingFeedbackBtn" title="Send Feedback">💬</button>
+
+    <!-- Tour Overlay -->
+    <div class="tour-overlay" id="tourOverlay"></div>
+    <div class="tour-tooltip" id="tourTooltip">
+        <h4 id="tourTitle">Welcome!</h4>
+        <p id="tourText">Let's take a quick tour of the ASIN Extractor features.</p>
+        <div class="tour-controls">
+            <button class="tour-btn" id="tourSkip">Skip</button>
+            <span class="tour-progress" id="tourProgress">1/5</span>
+            <button class="tour-btn" id="tourNext">Next</button>
+        </div>
+    </div>
+
     <div class="hero">
         <div class="hero-badge">
             <span>🔍</span>
@@ -497,9 +1081,191 @@
         </div>
         <h1>ASIN Extractor</h1>
         <p>Automatically extract and manage ASINs from VSE Fixer with marketplace detection, smart filtering, and one-click copying.</p>
+
+        <!-- Browser Compatibility Badge -->
+        <div class="browser-compat">
+            <div class="browser-item supported">
+                <span>🌐</span>
+                <span>Chrome ✅</span>
+            </div>
+            <div class="browser-item supported">
+                <span>🦊</span>
+                <span>Firefox ✅</span>
+            </div>
+            <div class="browser-item supported">
+                <span>⚡</span>
+                <span>Edge ✅</span>
+            </div>
+            <div class="browser-item partial">
+                <span>🧭</span>
+                <span>Safari ⚠️</span>
+            </div>
+        </div>
     </div>
 
     <div class="container">
+        <!-- Interactive Tool Preview Section -->
+        <section class="glass-card" id="preview">
+            <div class="sec-header">
+                <div class="sec-eyebrow">Interactive Demo</div>
+                <div class="sec-title">Try it yourself</div>
+                <p class="sec-sub">Experience the ASIN Extractor in action. Click, select, and copy!</p>
+            </div>
+
+            <!-- Demo Scenario Buttons -->
+            <div class="demo-scenarios">
+                <button class="scenario-btn active" data-scenario="normal">✨ Normal View</button>
+                <button class="scenario-btn" data-scenario="loading">⏳ Loading State</button>
+                <button class="scenario-btn" data-scenario="empty">📭 No ASINs</button>
+                <button class="scenario-btn" data-scenario="many">📊 10+ ASINs</button>
+            </div>
+
+            <div class="preview-container">
+                <div class="tool-mockup" id="toolMockup">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <span id="toolIcon">✨</span>
+                            <span id="asinCount">ASINs (4)</span>
+                        </div>
+                        <div class="tool-buttons">
+                            <button class="tool-btn-icon" id="reloadBtn" title="Reload ASINs">🔄</button>
+                            <button class="tool-btn-icon" id="minimizeBtn" title="Minimize">✖</button>
+                        </div>
+                    </div>
+
+                    <div class="tool-content" id="toolContent">
+                        <!-- Content will be dynamically loaded based on scenario -->
+                    </div>
+
+                    <div class="tool-footer" id="toolFooter">
+                        <button class="tool-action-btn btn-unselect" id="unselectBtn">Unselect All</button>
+                        <button class="tool-action-btn btn-copy" id="copyBtn">Copy Selected</button>
+                    </div>
+                </div>
+
+                <p class="preview-caption">
+                    👆 <strong>This is a fully interactive demo!</strong> Try different scenarios above, check/uncheck ASINs, and use the action buttons. The demo simulates real tool behavior.
+                </p>
+                <div class="demo-badge">✨ Live Interactive Demo</div>
+                <button class="tour-start-btn" id="startTourBtn">
+                    <span>🎯</span>
+                    <span>Start Guided Tour</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="glass-card" id="faq">
+            <div class="sec-header">
+                <div class="sec-eyebrow">FAQ</div>
+                <div class="sec-title">Frequently Asked Questions</div>
+                <p class="sec-sub">Everything you need to know about ASIN Extractor.</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Does it work on all browsers?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>ASIN Extractor works best on <strong>Chrome, Firefox, and Edge</strong> with Tampermonkey installed. Safari support is limited due to Tampermonkey compatibility issues. We recommend using Chrome for the best experience.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Will it slow down my browser?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No! The script is highly optimized and only runs on VSE Fixer pages (<code>https://prod.vse-fixer.tools.amazon.dev/*</code>). It uses efficient polling (every 500ms) and stops automatically after 30 seconds if no ASINs are found.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I update to the latest version?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Tampermonkey automatically checks for updates! You can also manually update by clicking the Tampermonkey icon → Dashboard → Check for updates. Or simply reinstall the script using the "Install Script" button above.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if ASINs aren't detected?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Try these solutions: 1) Click the manual <strong>🔍 ASIN</strong> button (top-right), 2) Click the <strong>🔄 Reload</strong> button in the widget header, 3) Click any "Fetch" button on the VSE Fixer page to trigger re-extraction, 4) Refresh the page and wait for auto-detection.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I customize the widget position?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! The widget is <strong>draggable</strong>. Simply click and hold the header (where it says "✨ ASINs") and drag it to your preferred position. Your browser will remember the position for future sessions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How many ASINs can it extract at once?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The tool extracts up to <strong>10 ASINs</strong> per extraction to maintain performance and readability. If you need more, you can reload after copying the first batch.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section class="glass-card" id="feedback">
+            <div class="sec-header">
+                <div class="sec-eyebrow">Feedback</div>
+                <div class="sec-title">We'd love to hear from you</div>
+                <p class="sec-sub">Share your experience, report bugs, or suggest new features.</p>
+            </div>
+
+            <form class="feedback-form" id="feedbackForm">
+                <div class="form-group">
+                    <label class="form-label" for="feedbackName">Your Name</label>
+                    <input type="text" id="feedbackName" class="form-input" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="feedbackEmail">Your Email</label>
+                    <input type="email" id="feedbackEmail" class="form-input" placeholder="your.email@amazon.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="feedbackType">Feedback Type</label>
+                    <select id="feedbackType" class="form-select" required>
+                        <option value="">Select type...</option>
+                        <option value="bug">🐛 Bug Report</option>
+                        <option value="feature">💡 Feature Request</option>
+                        <option value="improvement">⚡ Improvement Suggestion</option>
+                        <option value="general">💬 General Feedback</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="feedbackMessage">Your Message</label>
+                    <textarea id="feedbackMessage" class="form-textarea" placeholder="Tell us what's on your mind..." required></textarea>
+                </div>
+
+                <button type="submit" class="form-submit" id="submitFeedback">
+                    Send Feedback
+                </button>
+            </form>
+        </section>
+
         <section class="glass-card" id="features">
             <div class="sec-header">
                 <div class="sec-eyebrow">Features</div>
@@ -550,13 +1316,14 @@
             <div class="sec-header">
                 <div class="sec-eyebrow">Installation</div>
                 <div class="sec-title">Get Started</div>
-                <p class="sec-sub">One-click installation with Tampermonkey.</p>
+                <p class="sec-sub">Quick and easy installation in just a few clicks.</p>
             </div>
 
             <div class="install-steps">
                 <ol>
-                    <li>First, install <strong>Tampermonkey</strong> extension if you don't have it (click button below)</li>
-                    <li>Once Tampermonkey is installed, click the <strong>Install Script</strong> button</li>
+                    <li>Click the <strong>Install Script</strong> button below to begin installation</li>
+                    <li>If you don't have Tampermonkey installed, you'll need to install it first (use the secondary button)</li>
+                    <li>Once Tampermonkey is ready, click <strong>Install Script</strong> again</li>
                     <li>Tampermonkey will open with the script - click <strong>Install</strong> to confirm</li>
                     <li>Navigate to <code>https://prod.vse-fixer.tools.amazon.dev/*</code></li>
                     <li>The widget will automatically open when ASINs are detected!</li>
@@ -564,18 +1331,18 @@
             </div>
 
             <div class="button-container">
-                <a href="https://www.tampermonkey.net/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <a href="https://gist.github.com/olivieraamelia74-arch/de91f5839608094d16fc073dfdfa65a7/raw/de7ef13263189fc413d67ab06537cf53e9447231/ASIN_Extractor_V4.2.0.6.user.js" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <span>📥</span>
+                    <span>Install Script</span>
+                </a>
+                <a href="https://www.tampermonkey.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                     <span>🔧</span>
                     <span>Install Tampermonkey</span>
-                </a>
-                <a href="https://gist.github.com/olivieraamelia74-arch/de91f5839608094d16fc073dfdfa65a7/raw/0817e06f2cc015e81d19e4cb0b335d06133beca1/ASIN_Extractor_V02.user.js" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                    <span>📥</span>
-                        <span>Install Script</span>
                 </a>
             </div>
 
             <div class="note-box">
-                <strong>Note:</strong> Install Tampermonkey first, then click the Install Script button. The script will automatically prompt for installation in Tampermonkey.
+                <strong>Note:</strong> If you don't have Tampermonkey installed yet, click the "Install Tampermonkey" button first, then return to install the script. The script will automatically prompt for installation in Tampermonkey.
             </div>
         </section>
 
@@ -596,7 +1363,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">2️⃣</div>
                     <h3>Detection</h3>
-                    <p>Polls every second for ASINs in the page content using regex patterns.</p>
+                    <p>Polls every 500ms for ASINs in the page content using regex patterns.</p>
                 </div>
 
                 <div class="feature-card">
@@ -663,55 +1430,53 @@
             </div>
         </section>
 
-        
+        <div class="divider"></div>
+
+        <section class="glass-card" id="support">
+            <div class="sec-header">
+                <div class="sec-eyebrow" style="color:#667eea;">Support from SME</div>
+                <div class="sec-title">Technical Guidance</div>
+                <p class="sec-sub">Expert support and guidance.</p>
+            </div>
+
+            <div class="people-grid" style="justify-items: center;">
+                <a href="https://atoz.amazon.work/phonetool/users/dnmnjun" target="_blank" rel="noopener noreferrer" class="person-card support">
+                    <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/mnju.jpg?raw=true" alt="Manjunath D" class="person-avatar"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                    <div class="person-fallback">M</div>
+                    <div class="person-name">Manjunath D</div>
+                    <div class="person-role">Ad Operation SME</div>
+                </a>
+            </div>
+        </section>
 
         <div class="divider"></div>
 
-<section class="glass-card" id="support">
-    <div class="sec-header">
-        <div class="sec-eyebrow" style="color:#667eea;">Support from SME</div>
-        <div class="sec-title">Technical Guidance</div>
-        <p class="sec-sub">Expert support and guidance.</p>
-    </div>
+        <section class="glass-card" id="leadership">
+            <div class="sec-header">
+                <div class="sec-eyebrow" style="color:#a78bfa;">Leadership</div>
+                <div class="sec-title">Guided by</div>
+                <p class="sec-sub">The leaders who make it possible.</p>
+            </div>
 
-    <div class="people-grid" style="justify-items: center;">
-        <a href="https://atoz.amazon.work/phonetool/users/dnmnjun" target="_blank" rel="noopener noreferrer" class="person-card support">
-            <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/mnju.jpg?raw=true" alt="Manjunath D" class="person-avatar"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="person-fallback">M</div>
-            <div class="person-name">Manjunath D</div>
-            <div class="person-role">Ad Operation SME</div>
-        </a>
-    </div>
-</section>
+            <div class="people-grid">
+                <a href="https://atoz.amazon.work/phonetool/users/gaires" target="_blank" rel="noopener noreferrer" class="person-card lead">
+                    <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/sunita.jpg?raw=true" alt="Sunita Kumari Gaire" class="person-avatar"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                    <div class="person-fallback">S</div>
+                    <div class="person-name">Sunita Kumari Gaire</div>
+                    <div class="person-role">Ad Policing Manager</div>
+                </a>
 
-<div class="divider"></div>
-
-<section class="glass-card" id="leadership">
-    <div class="sec-header">
-        <div class="sec-eyebrow" style="color:#a78bfa;">Leadership</div>
-        <div class="sec-title">Guided by</div>
-        <p class="sec-sub">The leaders who make it possible.</p>
-    </div>
-
-    <div class="people-grid">
-        <a href="https://atoz.amazon.work/phonetool/users/gaires" target="_blank" rel="noopener noreferrer" class="person-card lead">
-            <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/sunita.jpg?raw=true" alt="Sunita Kumari Gaire" class="person-avatar"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="person-fallback">S</div>
-            <div class="person-name">Sunita Kumari Gaire</div>
-            <div class="person-role">Ad Policing Manager</div>
-        </a>
-
-        <a href="https://atoz.amazon.work/phonetool/users/annithin" target="_blank" rel="noopener noreferrer" class="person-card lead">
-            <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/nithin.jpg?raw=true" alt="Nithin Anand" class="person-avatar"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="person-fallback">N</div>
-            <div class="person-name">Nithin Anand</div>
-            <div class="person-role">Business Operations Manager</div>
-        </a>
-    </div>
-</section>
+                <a href="https://atoz.amazon.work/phonetool/users/annithin" target="_blank" rel="noopener noreferrer" class="person-card lead">
+                    <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/nithin.jpg?raw=true" alt="Nithin Anand" class="person-avatar"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                    <div class="person-fallback">N</div>
+                    <div class="person-name">Nithin Anand</div>
+                    <div class="person-role">Business Operations Manager</div>
+                </a>
+            </div>
+        </section>
     </div>
 
     <div class="footer">
@@ -719,5 +1484,332 @@
         <p>Built with ❤️ for VSE Fixer workflows</p>
         <p>© 2026 Amazon Ad Policing Team</p>
     </div>
+
+    <script>
+        // ASIN Data for different scenarios
+        const asinData = {
+            normal: [
+                { asin: 'B08N5WRWNW', marketplace: 'US', color: '#E63946' },
+                { asin: 'B07XJ8C8F5', marketplace: 'UK', color: '#2A9D8F' },
+                { asin: 'B09G9FPHY6', marketplace: 'DE', color: '#D62828' },
+                { asin: 'B0B7CXNW7Q', marketplace: 'JP', color: '#8B8000' }
+            ],
+            many: [
+                { asin: 'B08N5WRWNW', marketplace: 'US', color: '#E63946' },
+                { asin: 'B07XJ8C8F5', marketplace: 'UK', color: '#2A9D8F' },
+                { asin: 'B09G9FPHY6', marketplace: 'DE', color: '#D62828' },
+                { asin: 'B0B7CXNW7Q', marketplace: 'JP', color: '#8B8000' },
+                { asin: 'B08L5VFJ4K', marketplace: 'FR', color: '#7209B7' },
+                { asin: 'B07ZPKN6YR', marketplace: 'IT', color: '#D90368' },
+                { asin: 'B09JQMJHXY', marketplace: 'ES', color: '#4EA8DE' },
+                { asin: 'B08XYQRG3V', marketplace: 'CA', color: '#52B788' },
+                { asin: 'B07YNK87NZ', marketplace: 'IN', color: '#2D6A4F' },
+                { asin: 'B08HLZM3NQ', marketplace: 'AU', color: '#D68910' }
+            ]
+        };
+
+        // DOM Elements
+        const toolContent = document.getElementById('toolContent');
+        const toolFooter = document.getElementById('toolFooter');
+        const asinCount = document.getElementById('asinCount');
+        const toolIcon = document.getElementById('toolIcon');
+        const scenarioBtns = document.querySelectorAll('.scenario-btn');
+        const copyBtn = document.getElementById('copyBtn');
+        const unselectBtn = document.getElementById('unselectBtn');
+        const reloadBtn = document.getElementById('reloadBtn');
+        const minimizeBtn = document.getElementById('minimizeBtn');
+        const toolMockup = document.getElementById('toolMockup');
+        const successToast = document.getElementById('successToast');
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+                // Feedback Form Submission
+        const feedbackForm = document.getElementById('feedbackForm');
+        feedbackForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('feedbackName').value;
+            const email = document.getElementById('feedbackEmail').value;
+            const type = document.getElementById('feedbackType').value;
+            const message = document.getElementById('feedbackMessage').value;
+
+            // Create mailto link with feedback details
+            const subject = encodeURIComponent(`ASIN Extractor Feedback: ${type}`);
+            const body = encodeURIComponent(`
+Name: ${name}
+Email: ${email}
+Feedback Type: ${type}
+
+Message:
+${message}
+
+---
+Sent from ASIN Extractor Landing Page
+            `);
+
+            // Replace with your email address
+            const mailtoLink = `mailto:bshouvik@amazon.com?subject=${subject}&body=${body}`;
+
+            // Open email client
+            window.location.href = mailtoLink;
+
+            // Show success message
+            showToast('✅ Opening your email client...');
+
+            // Reset form
+            feedbackForm.reset();
+        });
+
+        // Floating Feedback Button
+        const floatingFeedbackBtn = document.getElementById('floatingFeedbackBtn');
+        floatingFeedbackBtn.addEventListener('click', () => {
+            document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Demo Scenario Switching
+        function loadScenario(scenario) {
+            // Update active button
+            scenarioBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            toolContent.innerHTML = '';
+
+            if (scenario === 'loading') {
+                toolIcon.textContent = '⏳';
+                asinCount.textContent = 'Searching...';
+                toolFooter.style.display = 'none';
+
+                toolContent.innerHTML = `
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                        <div class="loading-text">🔍 Polling... (2.3s)</div>
+                    </div>
+                `;
+            } else if (scenario === 'empty') {
+                toolIcon.textContent = '📭';
+                asinCount.textContent = 'No ASINs';
+                toolFooter.style.display = 'flex';
+
+                toolContent.innerHTML = `
+                    <div class="no-results">📭 No ASINs found</div>
+                `;
+            } else {
+                const data = scenario === 'many' ? asinData.many : asinData.normal;
+                toolIcon.textContent = '✨';
+                asinCount.textContent = `ASINs (${data.length})`;
+                toolFooter.style.display = 'flex';
+
+                data.forEach((item, index) => {
+                    const row = document.createElement('div');
+                    row.className = 'asin-row';
+                    row.style.cssText = `
+                        background: linear-gradient(135deg, ${item.color}22 0%, ${item.color}11 100%);
+                        border-left: 3px solid ${item.color};
+                    `;
+
+                    row.innerHTML = `
+                        <input type="checkbox" class="asin-checkbox" data-asin="${item.asin}" ${index < 2 ? 'checked' : ''}>
+                        <span class="asin-badge" style="background: ${item.color};">${index + 1}·${item.marketplace}</span>
+                        <span class="asin-link" data-url="https://www.amazon.com/dp/${item.asin}">${item.asin}</span>
+                    `;
+
+                    toolContent.appendChild(row);
+                });
+
+                // Re-attach event listeners
+                attachDemoEventListeners();
+            }
+        }
+
+        scenarioBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                loadScenario(btn.dataset.scenario);
+            });
+        });
+
+        // Demo Event Listeners
+        function attachDemoEventListeners() {
+            const checkboxes = document.querySelectorAll('.asin-checkbox');
+
+            // Copy Selected
+            copyBtn.onclick = () => {
+                const selectedAsins = Array.from(checkboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.dataset.asin);
+
+                if (selectedAsins.length === 0) {
+                    alert('Please select at least one ASIN to copy.');
+                    return;
+                }
+
+                const asinText = selectedAsins.join(',');
+                navigator.clipboard.writeText(asinText).then(() => {
+                    showToast('✅ Copied to clipboard!');
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = '✅ Copied!';
+                    setTimeout(() => { copyBtn.textContent = originalText; }, 2000);
+                });
+            };
+
+            // Unselect All
+            unselectBtn.onclick = () => {
+                checkboxes.forEach(cb => cb.checked = false);
+                const originalText = unselectBtn.textContent;
+                unselectBtn.textContent = '✅ Cleared!';
+                setTimeout(() => { unselectBtn.textContent = originalText; }, 1000);
+            };
+
+            // ASIN links
+            document.querySelectorAll('.asin-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const url = link.dataset.url;
+                    if (url) window.open(url, '_blank');
+                });
+            });
+        }
+
+        // Reload Button
+        reloadBtn.addEventListener('click', () => {
+            reloadBtn.style.transform = 'rotate(360deg)';
+            reloadBtn.style.transition = 'transform 0.6s ease';
+
+            setTimeout(() => {
+                reloadBtn.style.transform = 'rotate(0deg)';
+                const checkboxes = document.querySelectorAll('.asin-checkbox');
+                checkboxes.forEach(cb => { cb.checked = Math.random() > 0.5; });
+            }, 600);
+        });
+
+        // Minimize Button
+        minimizeBtn.addEventListener('click', () => {
+            toolMockup.style.transform = 'scale(0.95)';
+            toolMockup.style.opacity = '0.7';
+            setTimeout(() => {
+                toolMockup.style.transform = 'scale(1)';
+                toolMockup.style.opacity = '1';
+            }, 300);
+        });
+
+        // Toast Notification
+        function showToast(message) {
+            successToast.textContent = message;
+            successToast.classList.add('show');
+            setTimeout(() => { successToast.classList.remove('show'); }, 2000);
+        }
+
+        // Guided Tour
+        const tourOverlay = document.getElementById('tourOverlay');
+        const tourTooltip = document.getElementById('tourTooltip');
+        const tourTitle = document.getElementById('tourTitle');
+        const tourText = document.getElementById('tourText');
+        const tourProgress = document.getElementById('tourProgress');
+        const tourNext = document.getElementById('tourNext');
+        const tourSkip = document.getElementById('tourSkip');
+        const startTourBtn = document.getElementById('startTourBtn');
+
+        const tourSteps = [
+            {
+                title: 'Welcome to ASIN Extractor! 👋',
+                text: 'Let\'s take a quick tour of the key features. This will only take a minute!',
+                target: null
+            },
+            {
+                title: 'Interactive Demo 🎮',
+                text: 'Try different scenarios to see how the tool behaves. Click the scenario buttons to switch between normal, loading, empty, and many ASINs views.',
+                target: document.querySelector('.demo-scenarios')
+            },
+            {
+                title: 'Select & Copy ASINs 📋',
+                text: 'Check the boxes next to ASINs you want to copy, then click "Copy Selected" to copy them to your clipboard in comma-separated format.',
+                target: document.getElementById('toolContent')
+            },
+            {
+                title: 'Browser Compatibility 🌐',
+                text: 'The tool works best on Chrome, Firefox, and Edge. Make sure you have Tampermonkey installed!',
+                target: document.querySelector('.browser-compat')
+            },
+            {
+                title: 'Need Help? 💬',
+                text: 'Check out the FAQ section for common questions, or use the floating feedback button to send us your thoughts!',
+                target: document.getElementById('faq')
+            }
+        ];
+
+        let currentTourStep = 0;
+
+        function showTourStep(stepIndex) {
+            if (stepIndex >= tourSteps.length) {
+                endTour();
+                return;
+            }
+
+            const step = tourSteps[stepIndex];
+            tourTitle.textContent = step.title;
+            tourText.textContent = step.text;
+            tourProgress.textContent = `${stepIndex + 1}/${tourSteps.length}`;
+
+            if (step.target) {
+                const rect = step.target.getBoundingClientRect();
+                tourTooltip.style.top = `${rect.bottom + window.scrollY + 20}px`;
+                tourTooltip.style.left = `${rect.left + window.scrollX}px`;
+                step.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                tourTooltip.style.top = '50%';
+                tourTooltip.style.left = '50%';
+                tourTooltip.style.transform = 'translate(-50%, -50%)';
+            }
+
+            tourOverlay.classList.add('active');
+            tourTooltip.classList.add('active');
+
+            if (stepIndex === tourSteps.length - 1) {
+                tourNext.textContent = 'Finish';
+            } else {
+                tourNext.textContent = 'Next';
+            }
+        }
+
+        function endTour() {
+            tourOverlay.classList.remove('active');
+            tourTooltip.classList.remove('active');
+            currentTourStep = 0;
+            showToast('🎉 Tour completed!');
+        }
+
+        startTourBtn.addEventListener('click', () => {
+            currentTourStep = 0;
+            showTourStep(0);
+        });
+
+        tourNext.addEventListener('click', () => {
+            currentTourStep++;
+            showTourStep(currentTourStep);
+        });
+
+        tourSkip.addEventListener('click', endTour);
+
+        tourOverlay.addEventListener('click', endTour);
+
+        // Initialize with normal scenario
+        loadScenario('normal');
+        attachDemoEventListeners();
+    </script>
 </body>
 </html>
