@@ -1585,70 +1585,56 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // AppSheet Configuration - UPDATED WITH YOUR CREDENTIALS
-        const APPSHEET_CONFIG = {
-            appId: '5c488072-2148-4089-9775-7f97afa30f0e', // You'll need to get this from AppSheet
-            tableName: 'ASIN Extractor Feedback',
-            apiKey: 'V2-uy4WO-4DssL-wqV13-rX9ks-cN8wn-TT3Ba-02GmU-zv9XG'
-        };
+// Google Apps Script Configuration
+const FEEDBACK_CONFIG = {
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbxPfUKTydlIwE0IjGG_9ArNJ1eq2eKbh41Mc9gUECa0CL8RDOjgs8fYw6fiO4kVWEpw/exec'
+};
 
-        // Feedback form submission with AppSheet API
-        document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
+// Feedback form submission with Google Apps Script
+document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-            const submitBtn = e.target.querySelector('.form-submit');
-            const originalText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = '⏳ Submitting...';
+    const submitBtn = e.target.querySelector('.form-submit');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = '⏳ Submitting...';
 
-            // Prepare data for AppSheet
-            const feedbackData = {
-                Action: "Add",
-                Properties: {
-                    Locale: "en-US",
-                    Timezone: "Asia/Kolkata"
-                },
-                Rows: [{
-                    Timestamp: new Date().toISOString(),
-                    Name: document.getElementById('feedbackName').value,
-                    Email: document.getElementById('feedbackEmail').value,
-                    FeedbackType: document.getElementById('feedbackType').value,
-                    Message: document.getElementById('feedbackMessage').value
-                }]
-            };
+    const feedbackData = {
+        name: document.getElementById('feedbackName').value,
+        email: document.getElementById('feedbackEmail').value,
+        type: document.getElementById('feedbackType').value,
+        message: document.getElementById('feedbackMessage').value
+    };
 
-            try {
-                // Note: You need to replace 'YOUR_APP_ID' with your actual AppSheet App ID
-                const response = await fetch(`https://api.appsheet.com/api/v2/apps/${APPSHEET_CONFIG.appId}/tables/${APPSHEET_CONFIG.tableName}/Action`, {
-                    method: 'POST',
-                    headers: {
-                        'ApplicationAccessKey': APPSHEET_CONFIG.apiKey,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(feedbackData)
-                });
+    console.log('📤 Submitting feedback:', feedbackData);
 
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('Feedback submitted successfully:', result);
-                    showToast('✅ Feedback submitted successfully! Thank you!');
-                    e.target.reset();
-
-                    // Scroll to top of form
-                    document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    const error = await response.json();
-                    console.error('AppSheet API Error:', error);
-                    showToast('❌ Failed to submit. Please try again or contact support.');
-                }
-            } catch (error) {
-                console.error('Network Error:', error);
-                showToast('❌ Network error. Please check your connection and try again.');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            }
+    try {
+        const response = await fetch(FEEDBACK_CONFIG.scriptUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(feedbackData)
         });
+
+        console.log('✅ Feedback submitted successfully');
+        showToast('✅ Feedback submitted successfully! Thank you!');
+        e.target.reset();
+
+        setTimeout(() => {
+            document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
+        }, 500);
+
+    } catch (error) {
+        console.error('❌ Submission error:', error);
+        showToast('❌ Failed to submit. Please try again or contact support.');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+    }
+});
 
         // FAQ accordion
         document.querySelectorAll('.faq-item').forEach(item => {
