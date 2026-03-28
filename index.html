@@ -1609,118 +1609,125 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
 
     console.log('📤 Submitting feedback:', feedbackData);
 
-    try {
-        // Use fetch with redirect: 'follow' to handle Google's redirects
-        const response = await fetch(FEEDBACK_CONFIG.scriptUrl, {
-            method: 'POST',
-            redirect: 'follow',
-            headers: {
-                'Content-Type': 'text/plain;charset=utf-8'
-            },
-            body: JSON.stringify(feedbackData)
-        });
+    // Create a form and submit via iframe (bypasses CORS)
+    const iframe = document.createElement('iframe');
+    iframe.name = 'hidden_iframe_' + Date.now();
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
 
-        console.log('✅ Response received:', response.status);
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = FEEDBACK_CONFIG.scriptUrl;
+    form.target = iframe.name;
 
-        // Google Apps Script returns 200 even with redirects
-        if (response.status === 200 || response.ok) {
-            console.log('✅ Feedback submitted successfully');
-            showToast('✅ Feedback submitted successfully! Thank you!');
-            e.target.reset();
+    // Add form fields
+    Object.keys(feedbackData).forEach(key => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = feedbackData[key];
+        form.appendChild(input);
+    });
 
-            setTimeout(() => {
-                document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
-            }, 500);
-        } else {
-            console.warn('⚠️ Unexpected response:', response.status);
-            showToast('⚠️ Submitted but received unexpected response. Please check your sheet.');
-        }
+    document.body.appendChild(form);
 
-    } catch (error) {
-        console.error('❌ Submission error:', error);
-        showToast('❌ Failed to submit. Please try again or contact support.');
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-    }
+    // Submit and show success
+    form.submit();
+
+    console.log('✅ Feedback submitted successfully');
+    showToast('✅ Feedback submitted successfully! Thank you!');
+    document.getElementById('feedbackForm').reset();
+
+    setTimeout(() => {
+        document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
+    }, 500);
+
+    // Clean up after 3 seconds
+    setTimeout(() => {
+        document.body.removeChild(form);
+        document.body.removeChild(iframe);
+    }, 3000);
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
 });
 
-        // FAQ accordion
-        document.querySelectorAll('.faq-item').forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                if (!isActive) item.classList.add('active');
-            });
-        });
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+    });
+});
 
-        // Floating feedback button
-        document.getElementById('floatingFeedbackBtn').addEventListener('click', () => {
-            document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
-        });
+// Floating feedback button
+document.getElementById('floatingFeedbackBtn').addEventListener('click', () => {
+    document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
+});
 
-        // Tour functionality
-        const tourSteps = [
-            { element: '#demo', title: 'Interactive Demo', text: 'Try different scenarios to see how the tool works!' },
-            { element: '#features', title: 'Features', text: 'Explore all the powerful features of ASIN Extractor.' },
-            { element: '#how-it-works', title: 'How It Works', text: 'Understand the automatic workflow!' },
-            { element: '#installation', title: 'Installation', text: 'Get started in just a few clicks!' },
-            { element: '#feedback', title: 'Feedback', text: 'Share your thoughts and help us improve!' }
-        ];
+// Tour functionality
+const tourSteps = [
+    { element: '#demo', title: 'Interactive Demo', text: 'Try different scenarios to see how the tool works!' },
+    { element: '#features', title: 'Features', text: 'Explore all the powerful features of ASIN Extractor.' },
+    { element: '#how-it-works', title: 'How It Works', text: 'Understand the automatic workflow!' },
+    { element: '#installation', title: 'Installation', text: 'Get started in just a few clicks!' },
+    { element: '#feedback', title: 'Feedback', text: 'Share your thoughts and help us improve!' }
+];
 
-        let currentTourStep = 0;
+let currentTourStep = 0;
 
-        document.getElementById('startTourBtn').addEventListener('click', startTour);
-        document.getElementById('tourNext').addEventListener('click', nextTourStep);
-        document.getElementById('tourSkip').addEventListener('click', endTour);
+document.getElementById('startTourBtn').addEventListener('click', startTour);
+document.getElementById('tourNext').addEventListener('click', nextTourStep);
+document.getElementById('tourSkip').addEventListener('click', endTour);
 
-        function startTour() {
-            currentTourStep = 0;
-            showTourStep();
-        }
+function startTour() {
+    currentTourStep = 0;
+    showTourStep();
+}
 
-        function showTourStep() {
-            if (currentTourStep >= tourSteps.length) {
-                endTour();
-                return;
-            }
+function showTourStep() {
+    if (currentTourStep >= tourSteps.length) {
+        endTour();
+        return;
+    }
 
-            const step = tourSteps[currentTourStep];
-            const element = document.querySelector(step.element);
-            const tooltip = document.getElementById('tourTooltip');
-            const overlay = document.getElementById('tourOverlay');
+    const step = tourSteps[currentTourStep];
+    const element = document.querySelector(step.element);
+    const tooltip = document.getElementById('tourTooltip');
+    const overlay = document.getElementById('tourOverlay');
 
-            document.getElementById('tourTitle').textContent = step.title;
-            document.getElementById('tourText').textContent = step.text;
-            document.getElementById('tourProgress').textContent = `${currentTourStep + 1}/${tourSteps.length}`;
+    document.getElementById('tourTitle').textContent = step.title;
+    document.getElementById('tourText').textContent = step.text;
+    document.getElementById('tourProgress').textContent = `${currentTourStep + 1}/${tourSteps.length}`;
 
-            const rect = element.getBoundingClientRect();
-            tooltip.style.top = `${rect.top + window.scrollY - 150}px`;
-            tooltip.style.left = `${rect.left + window.scrollX}px`;
+    const rect = element.getBoundingClientRect();
+    tooltip.style.top = `${rect.top + window.scrollY - 150}px`;
+    tooltip.style.left = `${rect.left + window.scrollX}px`;
 
-            overlay.classList.add('active');
-            tooltip.classList.add('active');
+    overlay.classList.add('active');
+    tooltip.classList.add('active');
 
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
 
-        function nextTourStep() {
-            currentTourStep++;
-            showTourStep();
-        }
+function nextTourStep() {
+    currentTourStep++;
+    showTourStep();
+}
 
-        function endTour() {
-            document.getElementById('tourOverlay').classList.remove('active');
-            document.getElementById('tourTooltip').classList.remove('active');
-        }
+function endTour() {
+    document.getElementById('tourOverlay').classList.remove('active');
+    document.getElementById('tourTooltip').classList.remove('active');
+}
 
-        // Initialize demo
-        renderToolContent('normal');
+// Initialize demo
+renderToolContent('normal');
 
-        // Close tour when clicking overlay
-        document.getElementById('tourOverlay').addEventListener('click', endTour);
-    </script>
+// Close tour when clicking overlay
+document.getElementById('tourOverlay').addEventListener('click', endTour);
+</script>
 </body>
 </html>
         
