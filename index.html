@@ -1610,22 +1610,31 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
     console.log('📤 Submitting feedback:', feedbackData);
 
     try {
+        // Use fetch with redirect: 'follow' to handle Google's redirects
         const response = await fetch(FEEDBACK_CONFIG.scriptUrl, {
             method: 'POST',
-            mode: 'no-cors',
+            redirect: 'follow',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'text/plain;charset=utf-8'
             },
             body: JSON.stringify(feedbackData)
         });
 
-        console.log('✅ Feedback submitted successfully');
-        showToast('✅ Feedback submitted successfully! Thank you!');
-        e.target.reset();
+        console.log('✅ Response received:', response.status);
 
-        setTimeout(() => {
-            document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
-        }, 500);
+        // Google Apps Script returns 200 even with redirects
+        if (response.status === 200 || response.ok) {
+            console.log('✅ Feedback submitted successfully');
+            showToast('✅ Feedback submitted successfully! Thank you!');
+            e.target.reset();
+
+            setTimeout(() => {
+                document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        } else {
+            console.warn('⚠️ Unexpected response:', response.status);
+            showToast('⚠️ Submitted but received unexpected response. Please check your sheet.');
+        }
 
     } catch (error) {
         console.error('❌ Submission error:', error);
