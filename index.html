@@ -108,7 +108,6 @@
             font-weight: 400;
         }
 
-        /* Browser Compatibility Badge */
         .browser-compat {
             display: flex;
             justify-content: center;
@@ -239,9 +238,7 @@
             font-size: 0.875rem;
             line-height: 1.5;
         }
-
-        /* Interactive Tool Preview Styles */
-        .preview-container {
+                .preview-container {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
@@ -493,8 +490,27 @@
             50% { opacity: 0.7; }
         }
 
-        /* FAQ Styles */
-        .faq-container {
+        .note-box {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .note-box strong {
+            color: var(--accent);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 2rem 0;
+        }
+                .faq-container {
             max-width: 800px;
             margin: 0 auto;
         }
@@ -559,7 +575,6 @@
             font-size: 0.8125rem;
         }
 
-        /* Feedback Form Styles */
         .feedback-form {
             max-width: 600px;
             margin: 0 auto;
@@ -628,7 +643,6 @@
             transform: none;
         }
 
-        /* Floating Feedback Button */
         .floating-feedback-btn {
             position: fixed;
             bottom: 30px;
@@ -651,7 +665,6 @@
             box-shadow: 0 6px 24px var(--glow);
         }
 
-        /* Guided Tour Styles */
         .tour-overlay {
             position: fixed;
             top: 0;
@@ -764,8 +777,7 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        .install-steps {
+                .install-steps {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
@@ -802,6 +814,7 @@
             justify-content: center;
             font-weight: 700;
             font-size: 0.8125rem;
+            color: white;
         }
 
         .install-steps code {
@@ -953,174 +966,107 @@
             display: none;
             align-items: center;
             justify-content: center;
-            font-size: 2.25rem;
+            font-size: 2.5rem;
             font-weight: 700;
             margin: 0 auto 1rem;
             border: 2px solid rgba(167, 139, 250, 0.3);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
         }
 
         .person-name {
-            font-size: 0.9375rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 0.375rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
         }
 
         .person-role {
             font-size: 0.8125rem;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border), transparent);
-            margin: 2.5rem 0;
+            color: var(--text-secondary);
         }
 
         .footer {
             text-align: center;
-            padding: 2.5rem 1.5rem;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
             border-top: 1px solid var(--border);
-            margin-top: 2.5rem;
+            margin-top: 3rem;
         }
 
         .footer p {
-            margin-bottom: 0.625rem;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        .footer p:last-child {
-            color: var(--text-muted);
-            font-size: 0.8125rem;
-        }
-
-        .note-box {
-            background: rgba(102, 126, 234, 0.1);
-            border: 1px solid rgba(167, 139, 250, 0.3);
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            margin-top: 1.5rem;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        .note-box strong {
-            color: var(--accent);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .glass-card {
-                padding: 1.75rem 1.25rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .people-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-
-            .hero {
-                padding: 2rem 1rem 1.5rem;
-            }
-
-            .button-container {
-                flex-direction: column;
-            }
-
-            .tool-mockup {
-                max-width: 100%;
-            }
-
-            .floating-feedback-btn {
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
-                font-size: 1.25rem;
-            }
-        }
-
-        html {
-            scroll-behavior: smooth;
+            margin: 0.25rem 0;
         }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
 
-    <!-- Success Toast -->
-    <div id="successToast" class="success-toast">✅ Copied to clipboard!</div>
+    <div class="success-toast" id="successToast">✅ Copied to clipboard!</div>
 
-    <!-- Floating Feedback Button -->
-    <button class="floating-feedback-btn" id="floatingFeedbackBtn" title="Send Feedback">💬</button>
+    <button class="floating-feedback-btn" id="floatingFeedbackBtn">💬</button>
 
-    <!-- Tour Overlay -->
     <div class="tour-overlay" id="tourOverlay"></div>
     <div class="tour-tooltip" id="tourTooltip">
-        <h4 id="tourTitle">Welcome!</h4>
-        <p id="tourText">Let's take a quick tour of the ASIN Extractor features.</p>
+        <h4 id="tourTitle"></h4>
+        <p id="tourText"></p>
         <div class="tour-controls">
-            <button class="tour-btn" id="tourSkip">Skip</button>
-            <span class="tour-progress" id="tourProgress">1/5</span>
-            <button class="tour-btn" id="tourNext">Next</button>
+            <span class="tour-progress" id="tourProgress"></span>
+            <div>
+                <button class="tour-btn" id="tourSkip">Skip</button>
+                <button class="tour-btn" id="tourNext">Next</button>
+            </div>
         </div>
     </div>
 
     <div class="hero">
         <div class="hero-badge">
-            <span>🔍</span>
-            <span>VSE Fixer Tool</span>
+            <span>🚀</span>
+            <span>Tampermonkey Userscript</span>
         </div>
         <h1>ASIN Extractor</h1>
-        <p>Automatically extract and manage ASINs from VSE Fixer with marketplace detection, smart filtering, and one-click copying.</p>
+        <p>Automatically extract and manage ASINs from VSE Fixer with a sleek, draggable widget. Built for Amazon Ad Policing workflows.</p>
 
-        <!-- Browser Compatibility Badge -->
         <div class="browser-compat">
             <div class="browser-item supported">
-                <span>🌐</span>
-                <span>Chrome ✅</span>
+                <span>✅</span>
+                <span>Chrome</span>
             </div>
             <div class="browser-item supported">
-                <span>🦊</span>
-                <span>Firefox ✅</span>
+                <span>✅</span>
+                <span>Firefox</span>
             </div>
             <div class="browser-item supported">
-                <span>⚡</span>
-                <span>Edge ✅</span>
+                <span>✅</span>
+                <span>Edge</span>
             </div>
             <div class="browser-item partial">
-                <span>🧭</span>
-                <span>Safari ⚠️</span>
+                <span>⚠️</span>
+                <span>Safari (Limited)</span>
             </div>
         </div>
+
+        <button class="tour-start-btn" id="startTourBtn">
+            <span>🎯</span>
+            <span>Take a Quick Tour</span>
+        </button>
     </div>
 
     <div class="container">
-        <!-- Interactive Tool Preview Section -->
-        <section class="glass-card" id="preview">
+                <section class="glass-card" id="demo">
             <div class="sec-header">
                 <div class="sec-eyebrow">Interactive Demo</div>
-                <div class="sec-title">Try it yourself</div>
-                <p class="sec-sub">Experience the ASIN Extractor in action. Click, select, and copy!</p>
-            </div>
-
-            <!-- Demo Scenario Buttons -->
-            <div class="demo-scenarios">
-                <button class="scenario-btn active" data-scenario="normal">✨ Normal View</button>
-                <button class="scenario-btn" data-scenario="loading">⏳ Loading State</button>
-                <button class="scenario-btn" data-scenario="empty">📭 No ASINs</button>
-                <button class="scenario-btn" data-scenario="many">📊 10+ ASINs</button>
+                <div class="sec-title">Try It Out</div>
+                <p class="sec-sub">Experience the tool in action with different scenarios.</p>
             </div>
 
             <div class="preview-container">
+                <div class="demo-scenarios">
+                    <button class="scenario-btn active" data-scenario="normal">Normal (4 ASINs)</button>
+                    <button class="scenario-btn" data-scenario="loading">Loading State</button>
+                    <button class="scenario-btn" data-scenario="empty">No ASINs</button>
+                    <button class="scenario-btn" data-scenario="many">Many ASINs (10+)</button>
+                </div>
+
                 <div class="tool-mockup" id="toolMockup">
                     <div class="tool-header">
                         <div class="tool-title">
@@ -1128,13 +1074,13 @@
                             <span id="asinCount">ASINs (4)</span>
                         </div>
                         <div class="tool-buttons">
-                            <button class="tool-btn-icon" id="reloadBtn" title="Reload ASINs">🔄</button>
-                            <button class="tool-btn-icon" id="minimizeBtn" title="Minimize">✖</button>
+                            <button class="tool-btn-icon" id="reloadBtn" title="Reload">🔄</button>
+                            <button class="tool-btn-icon" id="minimizeBtn" title="Minimize">➖</button>
                         </div>
                     </div>
 
                     <div class="tool-content" id="toolContent">
-                        <!-- Content will be dynamically loaded based on scenario -->
+                        <!-- Dynamic content loaded by JavaScript -->
                     </div>
 
                     <div class="tool-footer" id="toolFooter">
@@ -1143,153 +1089,31 @@
                     </div>
                 </div>
 
-                <p class="preview-caption">
-                    👆 <strong>This is a fully interactive demo!</strong> Try different scenarios above, check/uncheck ASINs, and use the action buttons. The demo simulates real tool behavior.
-                </p>
-                <div class="demo-badge">✨ Live Interactive Demo</div>
-                <button class="tour-start-btn" id="startTourBtn">
-                    <span>🎯</span>
-                    <span>Start Guided Tour</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="glass-card" id="faq">
-            <div class="sec-header">
-                <div class="sec-eyebrow">FAQ</div>
-                <div class="sec-title">Frequently Asked Questions</div>
-                <p class="sec-sub">Everything you need to know about ASIN Extractor.</p>
-            </div>
-
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Does it work on all browsers?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>ASIN Extractor works best on <strong>Chrome, Firefox, and Edge</strong> with Tampermonkey installed. Safari support is limited due to Tampermonkey compatibility issues. We recommend using Chrome for the best experience.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Will it slow down my browser?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No! The script is highly optimized and only runs on VSE Fixer pages (<code>https://prod.vse-fixer.tools.amazon.dev/*</code>). It uses efficient polling (every 500ms) and stops automatically after 30 seconds if no ASINs are found.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How do I update to the latest version?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Tampermonkey automatically checks for updates! You can also manually update by clicking the Tampermonkey icon → Dashboard → Check for updates. Or simply reinstall the script using the "Install Script" button above.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What if ASINs aren't detected?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Try these solutions: 1) Click the manual <strong>🔍 ASIN</strong> button (top-right), 2) Click the <strong>🔄 Reload</strong> button in the widget header, 3) Click any "Fetch" button on the VSE Fixer page to trigger re-extraction, 4) Refresh the page and wait for auto-detection.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can I customize the widget position?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! The widget is <strong>draggable</strong>. Simply click and hold the header (where it says "✨ ASINs") and drag it to your preferred position. Your browser will remember the position for future sessions.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How many ASINs can it extract at once?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>The tool extracts up to <strong>10 ASINs</strong> per extraction to maintain performance and readability. If you need more, you can reload after copying the first batch.</p>
-                    </div>
+                <div class="preview-caption">
+                    <p>👆 Click the scenario buttons above to see different states</p>
+                    <span class="demo-badge">🎮 Fully Interactive</span>
                 </div>
             </div>
-        </section>
-
-        <!-- Feedback Section -->
-        <section class="glass-card" id="feedback">
-            <div class="sec-header">
-                <div class="sec-eyebrow">Feedback</div>
-                <div class="sec-title">We'd love to hear from you</div>
-                <p class="sec-sub">Share your experience, report bugs, or suggest new features.</p>
-            </div>
-
-            <form class="feedback-form" id="feedbackForm">
-                <div class="form-group">
-                    <label class="form-label" for="feedbackName">Your Name</label>
-                    <input type="text" id="feedbackName" class="form-input" placeholder="Enter your name" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="feedbackEmail">Your Email</label>
-                    <input type="email" id="feedbackEmail" class="form-input" placeholder="your.email@amazon.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="feedbackType">Feedback Type</label>
-                    <select id="feedbackType" class="form-select" required>
-                        <option value="">Select type...</option>
-                        <option value="bug">🐛 Bug Report</option>
-                        <option value="feature">💡 Feature Request</option>
-                        <option value="improvement">⚡ Improvement Suggestion</option>
-                        <option value="general">💬 General Feedback</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="feedbackMessage">Your Message</label>
-                    <textarea id="feedbackMessage" class="form-textarea" placeholder="Tell us what's on your mind..." required></textarea>
-                </div>
-
-                <button type="submit" class="form-submit" id="submitFeedback">
-                    Send Feedback
-                </button>
-            </form>
         </section>
 
         <section class="glass-card" id="features">
             <div class="sec-header">
                 <div class="sec-eyebrow">Features</div>
-                <div class="sec-title">What it does</div>
-                <p class="sec-sub">Powerful ASIN extraction and management for VSE Fixer workflows.</p>
+                <div class="sec-title">What Makes It Special</div>
+                <p class="sec-sub">Powerful features designed for efficiency.</p>
             </div>
 
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🎯</div>
                     <h3>Auto-Detection</h3>
-                    <p>Automatically opens when ASINs are detected on the page. No manual triggering needed.</p>
+                    <p>Automatically detects ASINs on page load and opens the widget when found.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Marketplace Support</h3>
-                    <p>Supports 30+ Amazon marketplaces with color-coded badges and direct PDP links.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Smart Extraction</h3>
-                    <p>Extracts up to 10 ASINs with marketplace IDs using advanced pattern matching.</p>
+                    <div class="feature-icon">🔍</div>
+                    <h3>Smart Polling</h3>
+                    <p>Continuously monitors for new ASINs every 500ms with efficient pattern matching.</p>
                 </div>
 
                 <div class="feature-card">
@@ -1308,6 +1132,46 @@
                     <div class="feature-icon">🎨</div>
                     <h3>Compact Design</h3>
                     <p>Slim, draggable widget that doesn't obstruct your workflow. Fixed buttons at bottom.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Marketplace Tags</h3>
+                    <p>Color-coded badges showing marketplace origin with advanced pattern matching.</p>
+                </div>
+            </div>
+        </section>
+
+                <section class="glass-card" id="how-it-works">
+            <div class="sec-header">
+                <div class="sec-eyebrow">How It Works</div>
+                <div class="sec-title">Simple & Automatic</div>
+                <p class="sec-sub">The widget works seamlessly in the background.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">1️⃣</div>
+                    <h3>Page Load</h3>
+                    <p>Script activates when you open VSE Fixer and monitors for ASINs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">2️⃣</div>
+                    <h3>Detection</h3>
+                    <p>Polls every 500ms for ASINs in the page content using regex patterns.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">3️⃣</div>
+                    <h3>Auto-Open</h3>
+                    <p>Widget opens automatically when ASINs are found, showing results immediately.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">4️⃣</div>
+                    <h3>Fetch Integration</h3>
+                    <p>Clicking any "Fetch" button triggers automatic re-extraction with loading animation.</p>
                 </div>
             </div>
         </section>
@@ -1346,41 +1210,7 @@
             </div>
         </section>
 
-        <section class="glass-card" id="how-it-works">
-            <div class="sec-header">
-                <div class="sec-eyebrow">How It Works</div>
-                <div class="sec-title">Simple & Automatic</div>
-                <p class="sec-sub">The widget works seamlessly in the background.</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">1️⃣</div>
-                    <h3>Page Load</h3>
-                    <p>Script activates when you open VSE Fixer and monitors for ASINs.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">2️⃣</div>
-                    <h3>Detection</h3>
-                    <p>Polls every 500ms for ASINs in the page content using regex patterns.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">3️⃣</div>
-                    <h3>Auto-Open</h3>
-                    <p>Widget opens automatically when ASINs are found, showing results immediately.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">4️⃣</div>
-                    <h3>Fetch Integration</h3>
-                    <p>Clicking any "Fetch" button triggers automatic re-extraction with loading animation.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="glass-card" id="team">
+                <section class="glass-card" id="team">
             <div class="sec-header">
                 <div class="sec-eyebrow">The Team</div>
                 <div class="sec-title">Built by</div>
@@ -1388,13 +1218,6 @@
             </div>
 
             <div class="people-grid">
-                <a href="https://atoz.amazon.work/phonetool/users/nmayuben" target="_blank" rel="noopener noreferrer" class="person-card">
-                    <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/mayur.jpg?raw=true" alt="Mayur Bendale" class="person-avatar"
-                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-                    <div class="person-fallback">M</div>
-                    <div class="person-name">Mayur Bendale</div>
-                    <div class="person-role">Content Reviewer</div>
-                </a>
 
                 <a href="https://atoz.amazon.work/phonetool/users/tusarmuk" target="_blank" rel="noopener noreferrer" class="person-card">
                     <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/204637985.jpg?raw=true" alt="Tusar Mukhopadhyay" class="person-avatar"
@@ -1426,6 +1249,24 @@
                     <div class="person-fallback">P</div>
                     <div class="person-name">Prakash Mishra</div>
                     <div class="person-role">Sr Content Reviewer Italian</div>
+                </a>
+
+                
+                <a href="https://atoz.amazon.work/phonetool/users/nmayuben" target="_blank" rel="noopener noreferrer" class="person-card">
+                    <img src="https://github.com/olivieraamelia74-arch/Link_Extractor/blob/olivieraamelia74-arch-patch-1/mayur.jpg?raw=true" alt="Mayur Bendale" class="person-avatar"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                    <div class="person-fallback">M</div>
+                    <div class="person-name">Mayur Bendale</div>
+                    <div class="person-role">Content Reviewer</div>
+                </a>
+
+                
+                <a href="https://atoz.amazon.work/phonetool/users/prbedere" target="_blank" rel="noopener noreferrer" class="person-card">
+                    <img src="link to priyanka " alt="Priyanka Bedere" class="person-avatar"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                    <div class="person-fallback">P</div>
+                    <div class="person-name">Priyanka Bedere</div>
+                    <div class="person-role">Content Reviewer</div>
                 </a>
             </div>
         </section>
@@ -1477,339 +1318,414 @@
                 </a>
             </div>
         </section>
+
+        <div class="divider"></div>
+
+                <!-- FEEDBACK SECTION - MOVED TO BOTTOM -->
+        <section class="glass-card" id="feedback">
+            <div class="sec-header">
+                <div class="sec-eyebrow">Feedback</div>
+                <div class="sec-title">We'd love to hear from you</div>
+                <p class="sec-sub">Share your experience, report bugs, or suggest new features.</p>
+            </div>
+
+            <form class="feedback-form" id="feedbackForm">
+                <div class="form-group">
+                    <label for="feedbackName" class="form-label">Name</label>
+                    <input type="text" id="feedbackName" class="form-input" placeholder="Your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="feedbackEmail" class="form-label">Email</label>
+                    <input type="email" id="feedbackEmail" class="form-input" placeholder="your.email@amazon.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="feedbackType" class="form-label">Feedback Type</label>
+                    <select id="feedbackType" class="form-select" required>
+                        <option value="">Select type...</option>
+                        <option value="bug">🐛 Bug Report</option>
+                        <option value="feature">💡 Feature Request</option>
+                        <option value="improvement">⚡ Improvement</option>
+                        <option value="general">💬 General Feedback</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="feedbackMessage" class="form-label">Message</label>
+                    <textarea id="feedbackMessage" class="form-textarea" placeholder="Tell us more..." required></textarea>
+                </div>
+
+                <button type="submit" class="form-submit">Send Feedback</button>
+            </form>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- FAQ SECTION - MOVED TO BOTTOM -->
+        <section class="glass-card" id="faq">
+            <div class="sec-header">
+                <div class="sec-eyebrow">FAQ</div>
+                <div class="sec-title">Frequently Asked Questions</div>
+                <p class="sec-sub">Everything you need to know about ASIN Extractor.</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is ASIN Extractor?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>ASIN Extractor is a Tampermonkey userscript that automatically detects and extracts ASINs from VSE Fixer pages. It displays them in a compact, draggable widget with features like multi-select, copy to clipboard, and marketplace tagging.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I install it?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>First, install Tampermonkey browser extension. Then click the "Install Script" button above. Tampermonkey will open with the script - click "Install" to confirm. The script will automatically activate on VSE Fixer pages.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Which browsers are supported?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Fully supported: Chrome, Firefox, Edge. Limited support: Safari (requires Tampermonkey or Userscripts extension). The script works best on Chromium-based browsers.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Does it work automatically?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! The script monitors the page every 500ms for ASINs. When ASINs are detected, the widget opens automatically. You can also manually reload using the 🔄 button in the widget header.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What do the colored badges mean?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The colored badges indicate the marketplace origin of each ASIN. For example: <code>US</code> for United States, <code>UK</code> for United Kingdom, <code>DE</code> for Germany, etc. This helps you quickly identify which marketplace each ASIN belongs to.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I select multiple ASINs?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Check the boxes next to ASINs you want to copy. Click "Copy Selected" to copy them as a comma-separated list. Use "Unselect All" to clear your selection.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if ASINs aren't detected?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Click the reload button (🔄) in the widget header to manually re-extract ASINs. If the issue persists, check that you're on a VSE Fixer page with ASINs present. The script uses regex pattern matching to find ASINs.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is my data stored anywhere?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No. The script runs entirely in your browser and doesn't send any data to external servers. All ASIN extraction and processing happens locally on your machine.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I report bugs or request features?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Use the feedback form above or click the floating 💬 button in the bottom-right corner. You can also reach out to any team member listed in the "Built by" section.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <div class="footer">
-        <p>🔍 ASIN Extractor v4.2.0.5</p>
-        <p>Built with ❤️ for VSE Fixer workflows</p>
-        <p>© 2026 Amazon Ad Policing Team</p>
+            <div class="footer">
+        <p>© 2024 ASIN Extractor | Built with ❤️ by the Ad Policing Team</p>
+        <p>Powered by Tampermonkey | For VSE Fixer Workflows</p>
     </div>
 
     <script>
-        // ASIN Data for different scenarios
-        const asinData = {
+        // Demo Scenarios Data
+        const scenarios = {
             normal: [
-                { asin: 'B08N5WRWNW', marketplace: 'US', color: '#E63946' },
-                { asin: 'B07XJ8C8F5', marketplace: 'UK', color: '#2A9D8F' },
-                { asin: 'B09G9FPHY6', marketplace: 'DE', color: '#D62828' },
-                { asin: 'B0B7CXNW7Q', marketplace: 'JP', color: '#8B8000' }
+                { asin: 'B08N5WRWNW', marketplace: 'US', color: '#3498db' },
+                { asin: 'B07XJ8C8F5', marketplace: 'UK', color: '#e74c3c' },
+                { asin: 'B09G9FPHY6', marketplace: 'DE', color: '#f39c12' },
+                { asin: 'B08L5VFJ2R', marketplace: 'JP', color: '#9b59b6' }
             ],
+            loading: null,
+            empty: [],
             many: [
-                { asin: 'B08N5WRWNW', marketplace: 'US', color: '#E63946' },
-                { asin: 'B07XJ8C8F5', marketplace: 'UK', color: '#2A9D8F' },
-                { asin: 'B09G9FPHY6', marketplace: 'DE', color: '#D62828' },
-                { asin: 'B0B7CXNW7Q', marketplace: 'JP', color: '#8B8000' },
-                { asin: 'B08L5VFJ4K', marketplace: 'FR', color: '#7209B7' },
-                { asin: 'B07ZPKN6YR', marketplace: 'IT', color: '#D90368' },
-                { asin: 'B09JQMJHXY', marketplace: 'ES', color: '#4EA8DE' },
-                { asin: 'B08XYQRG3V', marketplace: 'CA', color: '#52B788' },
-                { asin: 'B07YNK87NZ', marketplace: 'IN', color: '#2D6A4F' },
-                { asin: 'B08HLZM3NQ', marketplace: 'AU', color: '#D68910' }
+                { asin: 'B08N5WRWNW', marketplace: 'US', color: '#3498db' },
+                { asin: 'B07XJ8C8F5', marketplace: 'UK', color: '#e74c3c' },
+                { asin: 'B09G9FPHY6', marketplace: 'DE', color: '#f39c12' },
+                { asin: 'B08L5VFJ2R', marketplace: 'JP', color: '#9b59b6' },
+                { asin: 'B08N5WRWNW', marketplace: 'FR', color: '#1abc9c' },
+                { asin: 'B07XJ8C8F5', marketplace: 'IT', color: '#e67e22' },
+                { asin: 'B09G9FPHY6', marketplace: 'ES', color: '#34495e' },
+                { asin: 'B08L5VFJ2R', marketplace: 'CA', color: '#16a085' },
+                { asin: 'B08N5WRWNW', marketplace: 'AU', color: '#d35400' },
+                { asin: 'B07XJ8C8F5', marketplace: 'IN', color: '#c0392b' },
+                { asin: 'B09G9FPHY6', marketplace: 'BR', color: '#27ae60' },
+                { asin: 'B08L5VFJ2R', marketplace: 'MX', color: '#8e44ad' }
             ]
         };
 
-        // DOM Elements
-        const toolContent = document.getElementById('toolContent');
-        const toolFooter = document.getElementById('toolFooter');
-        const asinCount = document.getElementById('asinCount');
-        const toolIcon = document.getElementById('toolIcon');
-        const scenarioBtns = document.querySelectorAll('.scenario-btn');
-        const copyBtn = document.getElementById('copyBtn');
-        const unselectBtn = document.getElementById('unselectBtn');
-        const reloadBtn = document.getElementById('reloadBtn');
-        const minimizeBtn = document.getElementById('minimizeBtn');
-        const toolMockup = document.getElementById('toolMockup');
-        const successToast = document.getElementById('successToast');
+        let currentScenario = 'normal';
+        let selectedAsins = new Set();
 
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                const isActive = faqItem.classList.contains('active');
+        // Render tool content
+        function renderToolContent(scenario) {
+            const content = document.getElementById('toolContent');
+            const asinCount = document.getElementById('asinCount');
+            const data = scenarios[scenario];
 
-                // Close all FAQ items
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('active');
+            if (data === null) {
+                content.innerHTML = `
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                        <div class="loading-text">Extracting ASINs...</div>
+                    </div>
+                `;
+                asinCount.textContent = 'Loading...';
+                return;
+            }
+
+            if (data.length === 0) {
+                content.innerHTML = `
+                    <div class="no-results">
+                        <div style="font-size: 32px; margin-bottom: 8px;">🔍</div>
+                        <div>No ASINs found on this page</div>
+                    </div>
+                `;
+                asinCount.textContent = 'ASINs (0)';
+                return;
+            }
+
+            asinCount.textContent = `ASINs (${data.length})`;
+            content.innerHTML = data.map(item => `
+                <div class="asin-row" style="background: ${item.color}15;">
+                    <input type="checkbox" class="asin-checkbox" data-asin="${item.asin}" ${selectedAsins.has(item.asin) ? 'checked' : ''}>
+                    <span class="asin-badge" style="background: ${item.color};">${item.marketplace}</span>
+                    <a href="#" class="asin-link">${item.asin}</a>
+                </div>
+            `).join('');
+
+            // Add checkbox listeners
+            document.querySelectorAll('.asin-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        selectedAsins.add(e.target.dataset.asin);
+                    } else {
+                        selectedAsins.delete(e.target.dataset.asin);
+                    }
                 });
+            });
+        }
 
-                // Open clicked item if it wasn't active
-                if (!isActive) {
-                    faqItem.classList.add('active');
-                }
+        // Scenario button listeners
+        document.querySelectorAll('.scenario-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentScenario = btn.dataset.scenario;
+                selectedAsins.clear();
+                renderToolContent(currentScenario);
             });
         });
 
-                // Feedback Form Submission
-        const feedbackForm = document.getElementById('feedbackForm');
-        feedbackForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById('feedbackName').value;
-            const email = document.getElementById('feedbackEmail').value;
-            const type = document.getElementById('feedbackType').value;
-            const message = document.getElementById('feedbackMessage').value;
-
-            // Create mailto link with feedback details
-            const subject = encodeURIComponent(`ASIN Extractor Feedback: ${type}`);
-            const body = encodeURIComponent(`
-Name: ${name}
-Email: ${email}
-Feedback Type: ${type}
-
-Message:
-${message}
-
----
-Sent from ASIN Extractor Landing Page
-            `);
-
-            // Replace with your email address
-            const mailtoLink = `mailto:bshouvik@amazon.com?subject=${subject}&body=${body}`;
-
-            // Open email client
-            window.location.href = mailtoLink;
-
-            // Show success message
-            showToast('✅ Opening your email client...');
-
-            // Reset form
-            feedbackForm.reset();
+        // Tool action buttons
+        document.getElementById('reloadBtn').addEventListener('click', () => {
+            renderToolContent(currentScenario);
         });
 
-        // Floating Feedback Button
-        const floatingFeedbackBtn = document.getElementById('floatingFeedbackBtn');
-        floatingFeedbackBtn.addEventListener('click', () => {
+        document.getElementById('unselectBtn').addEventListener('click', () => {
+            selectedAsins.clear();
+            document.querySelectorAll('.asin-checkbox').forEach(cb => cb.checked = false);
+        });
+
+        document.getElementById('copyBtn').addEventListener('click', () => {
+            if (selectedAsins.size === 0) return;
+            const text = Array.from(selectedAsins).join(', ');
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('✅ Copied to clipboard!');
+            });
+        });
+
+        // Enhanced toast function with custom messages
+        function showToast(message = '✅ Copied to clipboard!') {
+            const toast = document.getElementById('successToast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // AppSheet Configuration - UPDATED WITH YOUR CREDENTIALS
+        const APPSHEET_CONFIG = {
+            appId: '5c488072-2148-4089-9775-7f97afa30f0e', // You'll need to get this from AppSheet
+            tableName: 'ASIN Extractor Feedback',
+            apiKey: 'V2-uy4WO-4DssL-wqV13-rX9ks-cN8wn-TT3Ba-02GmU-zv9XG'
+        };
+
+        // Feedback form submission with AppSheet API
+        document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = e.target.querySelector('.form-submit');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Submitting...';
+
+            // Prepare data for AppSheet
+            const feedbackData = {
+                Action: "Add",
+                Properties: {
+                    Locale: "en-US",
+                    Timezone: "Asia/Kolkata"
+                },
+                Rows: [{
+                    Timestamp: new Date().toISOString(),
+                    Name: document.getElementById('feedbackName').value,
+                    Email: document.getElementById('feedbackEmail').value,
+                    FeedbackType: document.getElementById('feedbackType').value,
+                    Message: document.getElementById('feedbackMessage').value
+                }]
+            };
+
+            try {
+                // Note: You need to replace 'YOUR_APP_ID' with your actual AppSheet App ID
+                const response = await fetch(`https://api.appsheet.com/api/v2/apps/${APPSHEET_CONFIG.appId}/tables/${APPSHEET_CONFIG.tableName}/Action`, {
+                    method: 'POST',
+                    headers: {
+                        'ApplicationAccessKey': APPSHEET_CONFIG.apiKey,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(feedbackData)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Feedback submitted successfully:', result);
+                    showToast('✅ Feedback submitted successfully! Thank you!');
+                    e.target.reset();
+
+                    // Scroll to top of form
+                    document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    const error = await response.json();
+                    console.error('AppSheet API Error:', error);
+                    showToast('❌ Failed to submit. Please try again or contact support.');
+                }
+            } catch (error) {
+                console.error('Network Error:', error);
+                showToast('❌ Network error. Please check your connection and try again.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // Floating feedback button
+        document.getElementById('floatingFeedbackBtn').addEventListener('click', () => {
             document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Demo Scenario Switching
-        function loadScenario(scenario) {
-            // Update active button
-            scenarioBtns.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            toolContent.innerHTML = '';
-
-            if (scenario === 'loading') {
-                toolIcon.textContent = '⏳';
-                asinCount.textContent = 'Searching...';
-                toolFooter.style.display = 'none';
-
-                toolContent.innerHTML = `
-                    <div class="loading-state">
-                        <div class="spinner"></div>
-                        <div class="loading-text">🔍 Polling... (2.3s)</div>
-                    </div>
-                `;
-            } else if (scenario === 'empty') {
-                toolIcon.textContent = '📭';
-                asinCount.textContent = 'No ASINs';
-                toolFooter.style.display = 'flex';
-
-                toolContent.innerHTML = `
-                    <div class="no-results">📭 No ASINs found</div>
-                `;
-            } else {
-                const data = scenario === 'many' ? asinData.many : asinData.normal;
-                toolIcon.textContent = '✨';
-                asinCount.textContent = `ASINs (${data.length})`;
-                toolFooter.style.display = 'flex';
-
-                data.forEach((item, index) => {
-                    const row = document.createElement('div');
-                    row.className = 'asin-row';
-                    row.style.cssText = `
-                        background: linear-gradient(135deg, ${item.color}22 0%, ${item.color}11 100%);
-                        border-left: 3px solid ${item.color};
-                    `;
-
-                    row.innerHTML = `
-                        <input type="checkbox" class="asin-checkbox" data-asin="${item.asin}" ${index < 2 ? 'checked' : ''}>
-                        <span class="asin-badge" style="background: ${item.color};">${index + 1}·${item.marketplace}</span>
-                        <span class="asin-link" data-url="https://www.amazon.com/dp/${item.asin}">${item.asin}</span>
-                    `;
-
-                    toolContent.appendChild(row);
-                });
-
-                // Re-attach event listeners
-                attachDemoEventListeners();
-            }
-        }
-
-        scenarioBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                loadScenario(btn.dataset.scenario);
-            });
-        });
-
-        // Demo Event Listeners
-        function attachDemoEventListeners() {
-            const checkboxes = document.querySelectorAll('.asin-checkbox');
-
-            // Copy Selected
-            copyBtn.onclick = () => {
-                const selectedAsins = Array.from(checkboxes)
-                    .filter(cb => cb.checked)
-                    .map(cb => cb.dataset.asin);
-
-                if (selectedAsins.length === 0) {
-                    alert('Please select at least one ASIN to copy.');
-                    return;
-                }
-
-                const asinText = selectedAsins.join(',');
-                navigator.clipboard.writeText(asinText).then(() => {
-                    showToast('✅ Copied to clipboard!');
-                    const originalText = copyBtn.textContent;
-                    copyBtn.textContent = '✅ Copied!';
-                    setTimeout(() => { copyBtn.textContent = originalText; }, 2000);
-                });
-            };
-
-            // Unselect All
-            unselectBtn.onclick = () => {
-                checkboxes.forEach(cb => cb.checked = false);
-                const originalText = unselectBtn.textContent;
-                unselectBtn.textContent = '✅ Cleared!';
-                setTimeout(() => { unselectBtn.textContent = originalText; }, 1000);
-            };
-
-            // ASIN links
-            document.querySelectorAll('.asin-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const url = link.dataset.url;
-                    if (url) window.open(url, '_blank');
-                });
-            });
-        }
-
-        // Reload Button
-        reloadBtn.addEventListener('click', () => {
-            reloadBtn.style.transform = 'rotate(360deg)';
-            reloadBtn.style.transition = 'transform 0.6s ease';
-
-            setTimeout(() => {
-                reloadBtn.style.transform = 'rotate(0deg)';
-                const checkboxes = document.querySelectorAll('.asin-checkbox');
-                checkboxes.forEach(cb => { cb.checked = Math.random() > 0.5; });
-            }, 600);
-        });
-
-        // Minimize Button
-        minimizeBtn.addEventListener('click', () => {
-            toolMockup.style.transform = 'scale(0.95)';
-            toolMockup.style.opacity = '0.7';
-            setTimeout(() => {
-                toolMockup.style.transform = 'scale(1)';
-                toolMockup.style.opacity = '1';
-            }, 300);
-        });
-
-        // Toast Notification
-        function showToast(message) {
-            successToast.textContent = message;
-            successToast.classList.add('show');
-            setTimeout(() => { successToast.classList.remove('show'); }, 2000);
-        }
-
-        // Guided Tour
-        const tourOverlay = document.getElementById('tourOverlay');
-        const tourTooltip = document.getElementById('tourTooltip');
-        const tourTitle = document.getElementById('tourTitle');
-        const tourText = document.getElementById('tourText');
-        const tourProgress = document.getElementById('tourProgress');
-        const tourNext = document.getElementById('tourNext');
-        const tourSkip = document.getElementById('tourSkip');
-        const startTourBtn = document.getElementById('startTourBtn');
-
+        // Tour functionality
         const tourSteps = [
-            {
-                title: 'Welcome to ASIN Extractor! 👋',
-                text: 'Let\'s take a quick tour of the key features. This will only take a minute!',
-                target: null
-            },
-            {
-                title: 'Interactive Demo 🎮',
-                text: 'Try different scenarios to see how the tool behaves. Click the scenario buttons to switch between normal, loading, empty, and many ASINs views.',
-                target: document.querySelector('.demo-scenarios')
-            },
-            {
-                title: 'Select & Copy ASINs 📋',
-                text: 'Check the boxes next to ASINs you want to copy, then click "Copy Selected" to copy them to your clipboard in comma-separated format.',
-                target: document.getElementById('toolContent')
-            },
-            {
-                title: 'Browser Compatibility 🌐',
-                text: 'The tool works best on Chrome, Firefox, and Edge. Make sure you have Tampermonkey installed!',
-                target: document.querySelector('.browser-compat')
-            },
-            {
-                title: 'Need Help? 💬',
-                text: 'Check out the FAQ section for common questions, or use the floating feedback button to send us your thoughts!',
-                target: document.getElementById('faq')
-            }
+            { element: '#demo', title: 'Interactive Demo', text: 'Try different scenarios to see how the tool works!' },
+            { element: '#features', title: 'Features', text: 'Explore all the powerful features of ASIN Extractor.' },
+            { element: '#how-it-works', title: 'How It Works', text: 'Understand the automatic workflow!' },
+            { element: '#installation', title: 'Installation', text: 'Get started in just a few clicks!' },
+            { element: '#feedback', title: 'Feedback', text: 'Share your thoughts and help us improve!' }
         ];
 
         let currentTourStep = 0;
 
-        function showTourStep(stepIndex) {
-            if (stepIndex >= tourSteps.length) {
+        document.getElementById('startTourBtn').addEventListener('click', startTour);
+        document.getElementById('tourNext').addEventListener('click', nextTourStep);
+        document.getElementById('tourSkip').addEventListener('click', endTour);
+
+        function startTour() {
+            currentTourStep = 0;
+            showTourStep();
+        }
+
+        function showTourStep() {
+            if (currentTourStep >= tourSteps.length) {
                 endTour();
                 return;
             }
 
-            const step = tourSteps[stepIndex];
-            tourTitle.textContent = step.title;
-            tourText.textContent = step.text;
-            tourProgress.textContent = `${stepIndex + 1}/${tourSteps.length}`;
+            const step = tourSteps[currentTourStep];
+            const element = document.querySelector(step.element);
+            const tooltip = document.getElementById('tourTooltip');
+            const overlay = document.getElementById('tourOverlay');
 
-            if (step.target) {
-                const rect = step.target.getBoundingClientRect();
-                tourTooltip.style.top = `${rect.bottom + window.scrollY + 20}px`;
-                tourTooltip.style.left = `${rect.left + window.scrollX}px`;
-                step.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                tourTooltip.style.top = '50%';
-                tourTooltip.style.left = '50%';
-                tourTooltip.style.transform = 'translate(-50%, -50%)';
-            }
+            document.getElementById('tourTitle').textContent = step.title;
+            document.getElementById('tourText').textContent = step.text;
+            document.getElementById('tourProgress').textContent = `${currentTourStep + 1}/${tourSteps.length}`;
 
-            tourOverlay.classList.add('active');
-            tourTooltip.classList.add('active');
+            const rect = element.getBoundingClientRect();
+            tooltip.style.top = `${rect.top + window.scrollY - 150}px`;
+            tooltip.style.left = `${rect.left + window.scrollX}px`;
 
-            if (stepIndex === tourSteps.length - 1) {
-                tourNext.textContent = 'Finish';
-            } else {
-                tourNext.textContent = 'Next';
-            }
+            overlay.classList.add('active');
+            tooltip.classList.add('active');
+
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function nextTourStep() {
+            currentTourStep++;
+            showTourStep();
         }
 
         function endTour() {
-            tourOverlay.classList.remove('active');
-            tourTooltip.classList.remove('active');
-            currentTourStep = 0;
-            showToast('🎉 Tour completed!');
+            document.getElementById('tourOverlay').classList.remove('active');
+            document.getElementById('tourTooltip').classList.remove('active');
         }
 
-        startTourBtn.addEventListener('click', () => {
-            currentTourStep = 0;
-            showTourStep(0);
-        });
+        // Initialize demo
+        renderToolContent('normal');
 
-        tourNext.addEventListener('click', () => {
-            currentTourStep++;
-            showTourStep(currentTourStep);
-        });
-
-        tourSkip.addEventListener('click', endTour);
-
-        tourOverlay.addEventListener('click', endTour);
-
-        // Initialize with normal scenario
-        loadScenario('normal');
-        attachDemoEventListeners();
+        // Close tour when clicking overlay
+        document.getElementById('tourOverlay').addEventListener('click', endTour);
     </script>
 </body>
 </html>
+        
