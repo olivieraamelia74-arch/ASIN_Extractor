@@ -1159,7 +1159,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">2️⃣</div>
                     <h3>Detection</h3>
-                    <p>Polls every 500ms for ASINs in the page content using regex patterns.</p>
+                    <p>Searches every 500ms for ASINs in the page content.</p>
                 </div>
 
                 <div class="feature-card">
@@ -1195,7 +1195,7 @@
             </div>
 
             <div class="button-container">
-                <a href="https://gist.github.com/olivieraamelia74-arch/de91f5839608094d16fc073dfdfa65a7/raw/6b2c18f7b2a4d5b945a70db628db7a9c68ea2a65/ASIN_Extractor_V4.2.0.7.user.js" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <a href="https://axzile.corp.amazon.com/-/carthamus/download_script/asin-extractor.user.js" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                     <span>📥</span>
                     <span>Install Script</span>
                 </a>
@@ -1321,44 +1321,31 @@
 
         <div class="divider"></div>
 
-                <!-- FEEDBACK SECTION - MOVED TO BOTTOM -->
-        <section class="glass-card" id="feedback">
-            <div class="sec-header">
-                <div class="sec-eyebrow">Feedback</div>
-                <div class="sec-title">We'd love to hear from you</div>
-                <p class="sec-sub">Share your experience, report bugs, or suggest new features.</p>
-            </div>
+<!-- FEEDBACK SECTION - MOVED TO BOTTOM -->
+<section class="glass-card" id="feedback">
+    <div class="sec-header">
+        <div class="sec-eyebrow">Feedback</div>
+        <div class="sec-title">We'd love to hear from you</div>
+        <p class="sec-sub">Share your experience, report bugs, or suggest new features.</p>
+    </div>
 
-            <form class="feedback-form" id="feedbackForm">
-                <div class="form-group">
-                    <label for="feedbackName" class="form-label">Name</label>
-                    <input type="text" id="feedbackName" class="form-input" placeholder="Your name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="feedbackEmail" class="form-label">Email</label>
-                    <input type="email" id="feedbackEmail" class="form-input" placeholder="your.email@amazon.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="feedbackType" class="form-label">Feedback Type</label>
-                    <select id="feedbackType" class="form-select" required>
-                        <option value="">Select type...</option>
-                        <option value="bug">🐛 Bug Report</option>
-                        <option value="feature">💡 Feature Request</option>
-                        <option value="improvement">⚡ Improvement</option>
-                        <option value="general">💬 General Feedback</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="feedbackMessage" class="form-label">Message</label>
-                    <textarea id="feedbackMessage" class="form-textarea" placeholder="Tell us more..." required></textarea>
-                </div>
-
-                <button type="submit" class="form-submit">Send Feedback</button>
-            </form>
-        </section>
+    <!-- Microsoft Forms Embed -->
+    <div style="max-width: 890px; margin: 0 auto; padding: 20px;">
+        <iframe
+            width="100%"
+            height="1370px"
+            src="https://forms.office.com/r/zmkZKyvbQ1?embed=true"
+            frameborder="0"
+            marginwidth="0"
+            marginheight="0"
+            style="border: none; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"
+            allowfullscreen
+            webkitallowfullscreen
+            mozallowfullscreen
+            msallowfullscreen>
+        </iframe>
+    </div>
+</section>
 
         <div class="divider"></div>
 
@@ -1465,7 +1452,7 @@
     </div>
 
             <div class="footer">
-        <p>© 2024 ASIN Extractor | Built with ❤️ by the Ad Policing Team</p>
+        <p>© 2026 ASIN Extractor | Built with ❤️ by the IVE Team</p>
         <p>Powered by Tampermonkey | For VSE Fixer Workflows</p>
     </div>
 
@@ -1585,72 +1572,7 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-// Google Apps Script Configuration
-const FEEDBACK_CONFIG = {
-    scriptUrl: 'https://script.google.com/macros/s/AKfycbxPfUKTydlIwE0IjGG_9ArNJ1eq2eKbh41Mc9gUECa0CL8RDOjgs8fYw6fiO4kVWEpw/exec'
-};
 
-// Feedback form submission with Google Apps Script
-document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const submitBtn = e.target.querySelector('.form-submit');
-    const originalText = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.textContent = '⏳ Submitting...';
-
-    const feedbackData = {
-        name: document.getElementById('feedbackName').value,
-        email: document.getElementById('feedbackEmail').value,
-        type: document.getElementById('feedbackType').value,
-        message: document.getElementById('feedbackMessage').value
-    };
-
-    console.log('📤 Submitting feedback:', feedbackData);
-
-    // Create a form and submit via iframe (bypasses CORS)
-    const iframe = document.createElement('iframe');
-    iframe.name = 'hidden_iframe_' + Date.now();
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = FEEDBACK_CONFIG.scriptUrl;
-    form.target = iframe.name;
-
-    // Add form fields
-    Object.keys(feedbackData).forEach(key => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = feedbackData[key];
-        form.appendChild(input);
-    });
-
-    document.body.appendChild(form);
-
-    // Submit and show success
-    form.submit();
-
-    console.log('✅ Feedback submitted successfully');
-    showToast('✅ Feedback submitted successfully! Thank you!');
-    document.getElementById('feedbackForm').reset();
-
-    setTimeout(() => {
-        document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
-    }, 500);
-
-    // Clean up after 3 seconds
-    setTimeout(() => {
-        document.body.removeChild(form);
-        document.body.removeChild(iframe);
-    }, 3000);
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalText;
-});
 
 // FAQ accordion
 document.querySelectorAll('.faq-item').forEach(item => {
@@ -1730,4 +1652,3 @@ document.getElementById('tourOverlay').addEventListener('click', endTour);
 </script>
 </body>
 </html>
-        
